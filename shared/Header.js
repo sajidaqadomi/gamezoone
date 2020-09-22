@@ -1,17 +1,25 @@
 import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
-import { Ionicons } from '@expo/vector-icons';
+import { StyleSheet, Text, View, Image, ImageBackground } from 'react-native'
+import { Entypo } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
 
-const Header = () => {
+const Header = ({ title }) => {
+    console.log('header in', title)
+    const navigation = useNavigation()
+    const handlePress = () => {
+        navigation.openDrawer()
+
+    }
     return (
-        <View style={styles.header}>
-            <Text></Text>
-            <View>
+        <ImageBackground style={styles.header} source={require('../assets/game_bg.png')}>
+            <Entypo name="menu" size={28} color="black" style={styles.icon} onPress={handlePress} />
+            <View style={styles.headerTitle}>
+                <Image source={require('../assets/heart_logo.png')} style={styles.headerImg} />
                 <Text style={styles.headerText}>
-
+                    {title}
                 </Text>
             </View>
-        </View>
+        </ImageBackground>
     )
 }
 
@@ -33,5 +41,18 @@ const styles = StyleSheet.create({
         letterSpacing: 1
 
 
+    },
+    icon: {
+        position: 'absolute',
+        left: 15
+
+    },
+    headerTitle: {
+        flexDirection: 'row'
+    },
+    headerImg: {
+        width: 26,
+        height: 26,
+        marginHorizontal: 10
     }
 })
